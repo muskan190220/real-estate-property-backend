@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Ignore the actual configuration file
+application.properties
+
+# Optional: Ignore other sensitive files
+*.keystore
+*.jks
+*.p12
+*.cer
+*.crt
+*.key
