@@ -22,9 +22,10 @@ public class PropertyServiceImp implements PropertyService{
     }
 
     @Override
-    public void addProperty(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl) {
+    public String addProperty(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl) {
         Property property = new Property(propertyTitle, description, location, ownerName, ownerContact, type, size, price, imageUrl, LocalDateTime.now());
         propertyRepository.save(property);
+        return propertyTitle;
     }
 
     @Override
@@ -63,4 +64,10 @@ public class PropertyServiceImp implements PropertyService{
         return propertyRepository.findById(propertyId).orElse(null);
     }
 
-}
+    @Override
+    public void save(Property property) {
+            propertyRepository.save(property);
+        }
+    }
+
+

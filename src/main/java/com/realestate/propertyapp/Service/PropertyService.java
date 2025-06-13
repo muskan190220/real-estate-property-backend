@@ -8,7 +8,7 @@ public interface PropertyService {
 
 
     // Method to add a new property
-    void addProperty(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl);
+    String addProperty(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl);
 
     // Method to update an existing property
     void updateProperty(Long propertyId, String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl);
@@ -21,4 +21,7 @@ public interface PropertyService {
 
     // Method to get a property by ID
     Property getPropertyById(Long propertyId);
+
+    void save(Property property);
+
 }
