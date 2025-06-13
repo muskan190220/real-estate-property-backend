@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
-public class PropertyEntity {
+public class Property {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class PropertyEntity {
     private String imageUrl;
     private LocalDateTime listedDate;
 
-    public PropertyEntity() {
+    public Property() {
     }
 
-    public PropertyEntity(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl, LocalDateTime listedDate) {
+    public Property(String propertyTitle, String description, String location, String ownerName, String ownerContact, String type, String size, Double price, String imageUrl, LocalDateTime listedDate) {
         this.propertyTitle = propertyTitle;
         this.description = description;
         this.location = location;
@@ -76,9 +76,7 @@ public class PropertyEntity {
     public void setOwnerContact(String ownerContact) {
         this.ownerContact = ownerContact;
     }
-    public String getType() {
-        return type;
-    }
+    public String getType() {return type;}
     public void setType(String type) {
         this.type = type;
     }

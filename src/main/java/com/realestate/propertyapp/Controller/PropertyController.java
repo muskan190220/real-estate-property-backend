@@ -4,8 +4,14 @@ import com.realestate.propertyapp.Entity.Property;
 import com.realestate.propertyapp.Service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class PropertyController {
@@ -35,6 +41,28 @@ public class PropertyController {
                 property.getSize(), property.getPrice(), property.getImageUrl()
         );
         return "Property added successfully!";
+    }
+
+    @PostMapping("/api/property/{id}/upload-image")
+    public String uploadImage(@PathVariable Long id, @RequestParam("image") MultipartFile file) {
+        try {
+            Property property = propertyService.getPropertyById(id);
+            if (property == null) return "Property not found";
+
+            String folder = "src/main/resources/static/uploads/";
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Path path = Paths.get(folder + fileName);
+
+            Files.write(path, file.getBytes());
+
+            String imageUrl = "/uploads/" + fileName;
+            property.setImageUrl(imageUrl);
+            propertyService.save(property);  // Add save() method in service
+
+            return "Image uploaded successfully! URL: " + imageUrl;
+        } catch (IOException e) {
+            return "Error uploading image: " + e.getMessage();
+        }
     }
 
     @PutMapping("/api/property/update/{id}")
